@@ -67,13 +67,13 @@
 
 //BOLEANOS
 
-const numero = 15
+const numero = 20
 const boleano = false
 
-const esMayorQue15 = (numero > 20)
+const esMayorQue15 = (numero > 15)
 
 if (esMayorQue15) {
-    console.log("Es mayo que 15")
+    console.log("Es mayor que 15")
 }
 
 
@@ -116,4 +116,25 @@ if ((operadorUno == "Juan") || (operadorUno == "Maria")) {
 
 if ((operadorUno == "Juan") && (operadorDos == "Maria")) {
     console.log("Aca esta Juan Y Maria");
+}
+
+/**
+ * OPERADOR NOT
+ */
+
+const numerito = 12;
+const esNumero10 = (numerito === 10);
+
+console.log(esNumero10);
+
+// Si el número es igual a 10
+
+if (esNumero10) {
+    console.log("Es numero 10");
+}
+
+
+// Si el número no es igual a 10
+if (!esNumero10) {
+    console.log("No es número 10");
 }
