@@ -1,102 +1,119 @@
-function menuPrincipal() {
-    let opcionMenuReceta
-    let receta
-
-    while (opcionMenuReceta !== 0) {
-        console.log("***************************************************************************")
-        console.log("_________________ * BIENVENIDO AL RECETARIO * CULINARIA * __________________")
-        console.log("***************************************************************************")
-
-        opcionMenuReceta = parseInt(prompt("Menu: \n1 - Crear nueva receta\n2 - Ver mi receta \n3 - Mi receta es saludable? \n0 - Salir"));
-
-        if (isNaN(opcionMenuReceta)) {
-            console.log("Por favor, ingrese un numero valido.")
-        }
-        switch (opcionMenuReceta) {
-            case 1:
-                receta = crearReceta()
-                console.log("La receta: " + receta.nombreReceta + " fue ingresada con exito!")
-                break;
-            case 2:
-                verReceta(receta)
-                break;
-            case 3:
-                recetaSaludable()
-
-        }
-    }
-
-}
-
 function crearReceta() {
-    Receta = {
-        nombreReceta: prompt("Ingrese el nombre de la receta. "),
-        ingredientesReceta: prompt("Ingrese los ingredientes de la receta"),
-        pasos: prompt("Ingrese los pasos para preparar esta receta")
-    }
-    return Receta
+
+    const nombreReceta = prompt("Ingrese el nombre de la receta. ")
+    const ingredientesReceta = prompt("Ingrese los ingredientes de la receta")
+    const pasos = prompt("Ingrese los pasos para preparar esta receta")
+
+    alert("La receta: " + nombreReceta + " fue ingresada con éxito!");
+    return [nombreReceta, ingredientesReceta, pasos]
 }
 
-function verReceta(receta) {
-    let opcionMenuReceta
+function verReceta(nombreReceta, ingredientesReceta, pasos) {
 
-    while (opcionMenuReceta !== 0) {
-        console.log("***************************************************************************")
-        console.log("------------------ BIENVENIDO AL MODULO DE VER RECETA  --------------------")
-        console.log("***************************************************************************")
-        if (!isNaN(receta)) {
-            console.log("Para preparar la receta: " + receta.nombreReceta + " debemos tener los ingredientes: " + receta.ingredientesReceta + "\n y seguir los siguientes pasos: " + receta.pasos)
-            opcionMenuReceta = parseInt(prompt("Desea ver la receta nuevamente? Ingrese 1 para verla de nuevo, ingrese 0 para salir"))
-            if (isNaN(opcionMenuReceta) || opcionMenuReceta !== 1) {
-                alert("Por favor, ingrese un numero valido")
+    console.log("***************************************************************************")
+    console.log("------------------ BIENVENIDO AL MODULO DE VER RECETA  --------------------")
+    console.log("***************************************************************************")
+
+    if (!nombreReceta || !ingredientesReceta || !pasos) {
+        return alert("Aun no hay recetas guardadas en el sistema, por favor primero ingrese una nueva receta.")
+
+    }
+    return console.log("Para preparar la receta: " + nombreReceta + " debemos tener los ingredientes: " + ingredientesReceta + "\n y seguir los siguientes pasos: " + pasos)
+}
+
+function recetaConAzucar() {
+
+    const tieneAzucar = prompt("¿Su producto tiene azúcar? si/no").toLowerCase();
+
+    if (tieneAzucar !== "si" && tieneAzucar !== "no") {
+        alert("Opcion no valida. Volviendo al menu principal")
+        return;
+    } else {
+        if (tieneAzucar === "si") {
+            const gramosTotales = parseFloat(prompt("¿Cuantos gramos totales tiene su receta?"))
+            const gramosAzucar = parseFloat(prompt("¿Cuantos gramos tiene de azucar?"))
+
+            if (isNaN(gramosTotales) || isNaN(gramosAzucar)) {
+                alert("Por favor, ingrese un valor valido.")
+            } else {
+                //Se considera exceso de azucar, cuando mas del 13% del producto tiene azucar. 
+
+                if (gramosAzucar > (gramosTotales * 0.13)) {
+                    alert("CUIDADO. Su producto tiene exceso de azucar!")
+                } else {
+                    alert("Felicitaciones. Se producto esta dentro de los limites saludables!")
+                }
             }
-        } else {
-            console.log("Aun no hay recetas guardadas en el sistema, por favor primero ingrese una nueva receta.")
-            break;
         }
     }
+
 }
 
+function recetaConSal() {
+    const tieneSal = prompt("¿Su producto tiene sal? si/no").toLowerCase();
 
-function recetaSaludable() {
-
-
-    const tieneAzucar = prompt("¿Su producto tiene azucar? si/no")
-
-    if ((tieneAzucar !== "no") || (tieneAzucar !== "si") || isNaN(tieneSal)) {
-        console.log("Opcion no valida.")
-    }
-
-    if (tieneAzucar === "si") {
-        const gramosTotales = parseFloat(prompt("¿Cuantos gramos totales tiene su receta?"))
-        const gramosAzucar = parseFloat(prompt("¿Cuantos gramos tiene de azucar?"))
-
-        //Se considera exceso de azucar, cuando mas del 13% del producto tiene azucar. 
-        if (gramosAzucar > (gramosTotales * 0.13)) {
-            console.log("CUIDADO. Su producto tiene exceso de azucar!")
-        } else {
-            console.log("Felicitaciones. Se producto esta dentro de los limites saludables!")
-        }
-    }
-    const tieneSal = prompt("¿Su producto tiene sal? si/no")
-
-    if ((tieneSal !== "no") || (tieneSal !== "si") || isNaN(tieneSal)) {
-        console.log("Opcion no valida. Volviendo al menu principal")
+    if (tieneSal !== "si" && tieneSal !== "no") {
+        alert("Opcion no valida. Volviendo al menu principal")
+        return;
     }
 
     if (tieneSal === "si") {
 
         const gramosTotales = parseFloat(prompt("¿Cuantos gramos totales tiene su receta?"))
         const gramosSal = parseFloat(prompt("¿Cuantos gramos tiene de sal?"))
-        //Se considera exceso de sal, cuando mas del 0.5% del producto tiene azucar. 
-        if ((gramosTotales * 0.005) >= gramosSal) {
-            console.log("CUIDADO. Su producto tiene exceso de sal!")
-        } else {
-            console.log("Felicitaciones. Se producto esta dentro de los limites saludables!")
-        }
 
+        if (isNaN(gramosTotales) || isNaN(gramosSal)) {
+            alert("Por favor, ingrese un valor valido.")
+        } else {
+
+            //Se considera exceso de sal, cuando mas del 0.5% del producto tiene azucar. 
+            if ((gramosTotales * 0.005) >= gramosSal) {
+                alert("CUIDADO. Su producto tiene exceso de sal!")
+            } else {
+                alert("Felicitaciones. Se producto esta dentro de los limites saludables!")
+            }
+        }
     }
 }
 
+function menuPrincipal() {
+    let opcionMenuReceta
+    let nombreReceta
+    let ingredientesReceta
+    let pasos
+
+    while (opcionMenuReceta !== 0) {
+        console.log("***************************************************************************")
+        console.log("_________________ * BIENVENIDO AL RECETARIO * CULINARIA * __________________")
+        console.log("***************************************************************************")
+
+        opcionMenuReceta = parseInt(prompt("Menu: \n1 - Crear nueva receta\n2 - Ver mi receta \n3 - Mi receta tiene mucha azucar? \n4 - Mi receta tiene mucha sal?\n0 - Salir"));
+
+        if (isNaN(opcionMenuReceta)) {
+            alert("Por favor, ingrese un numero valido.")
+        }
+        switch (opcionMenuReceta) {
+            case 1:
+                [nombreReceta, ingredientesReceta, pasos] = crearReceta()
+                break;
+            case 2:
+                verReceta(nombreReceta, ingredientesReceta, pasos)
+                break;
+            case 3:
+                recetaConAzucar()
+                break;
+            case 4:
+                recetaConSal()
+                break;
+            case 0:
+                alert("Muchas gracias por usar el sistema, esperamos verlo pronto! :)")
+                break;
+            default:
+                alert("Por favor, ingrese un numero valido")
+                break;
+        }
+    }
+}
 
 menuPrincipal()
+
