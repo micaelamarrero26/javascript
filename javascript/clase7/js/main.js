@@ -167,7 +167,7 @@ console.log(vendido);
  * FILTER
  */
 
-const productos = [
+const productos3 = [
     {
         nombre: "Tomates",
         precio: 1500,
@@ -185,7 +185,7 @@ const productos = [
     }
 ];
 
-const vendidos = productos.filter((el) => {
+const vendidos = productos3.filter((el) => {
     return el.vendido;
 });
 const precioMayorA5000 = productos.filter((el) => {
@@ -196,7 +196,7 @@ const precioMayorA5000 = productos.filter((el) => {
  * SOME
  */
 
-const productos = [
+const productos1 = [
     {
         nombre: "Tomates",
         precio: 1500,
@@ -214,7 +214,7 @@ const productos = [
     }
 ];
 
-const estaVendido = productos.some((el) => {
+const estaVendido = productos1.some((el) => {
     return el.vendido;
 });
 
