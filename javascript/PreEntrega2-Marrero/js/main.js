@@ -69,7 +69,8 @@ function buscarUnaReceta() {
     }
 }
 
-function verTodasLasRecetas() { //MEJORAR ESTA FUNCION PARA VER TODOS LOS INGREGIENTES Y PASOS.
+function verTodasLasRecetas() { //TODO : MEJORAR ESTA FUNCION PARA VER TODOS LOS INGREGIENTES Y PASOS.
+    //PODEMOS UTILIZAR UN FILTER
     recetas.forEach((el, i) => {
         console.log("Receta: " + (i + 1) + " - " + el.nombreReceta);
     })
