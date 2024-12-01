@@ -103,14 +103,6 @@ function verTodasLasRecetas() {
     });
 }
 
-function rellenarFormularioEdicion(receta) {
-    document.getElementById("nombreRecetaEditar").value = receta.nombreReceta;
-    document.getElementById("ingredientesRecetaEditar").value = receta.ingredientesReceta;
-    document.getElementById("pasosRecetaEditar").value = receta.pasosReceta;
-}
-
-
-
 function renderizarTablaReceta(recetaEncontrada) {
 
     tbodyRecetas.innerHTML = "";
