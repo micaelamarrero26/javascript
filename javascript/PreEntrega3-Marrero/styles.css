@@ -11,7 +11,7 @@ body {
 }
 
 /* Caja para el título */
-.culinaria-box {
+.titulo{
     margin-top: 50px;
     margin-bottom: 30px; /* Espaciado debajo del título */
     background-color: #ffffff; /* Fondo blanco */
@@ -22,20 +22,19 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el efecto 3D */
 }
 
-.culinaria-box h1 {
-    margin: 0; /* Eliminar márgenes del título */
+.titulo h1 {
+    margin: 0;
     font-size: 24px;
-    color: #4caf50; /* Texto verde */
+    color: #4caf50;
 }
 
 /* Contenedor para los botones */
-.button-container {
+.menu {
     display: flex; /* Alineación horizontal de los botones */
     justify-content: center; /* Centra los botones horizontalmente */
     gap: 15px; /* Espaciado entre botones */
     margin-top: 20px; /* Margen superior para los botones */
 
-/* Estilo de los botones */
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -53,7 +52,7 @@ button:hover {
 }
 
 /* Estilos básicos para la tabla */
-table {
+.tablaVerTodasLasRecetas, .tablaEliminarRecetas, .formEditarReceta{
     width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
     border-collapse: collapse; /* Elimina el espacio entre bordes */
     margin-top: 20px; /* Añade espacio arriba de la tabla */
@@ -62,18 +61,74 @@ table {
 }
 
 /* Borde para celdas */
-table th, table td {
+.tablaVerTodasLasRecetas th, table td, .tablaEliminarRecetas th, table td, .formEditarReceta th, table td {
     border: 1px solid #ddd; /* Borde gris claro */
     padding: 8px; /* Espaciado interno */
 }
 
 /* Fondo para encabezados */
-table th {
+.tablaVerTodasLasRecetas th , .tablaEliminarRecetas th, .formEditarReceta th {
     background-color: #f4f4f4; /* Fondo gris claro */
     font-weight: bold; /* Texto en negrita */
 }
 
 /* Filas alternas con diferente color */
-table tr:nth-child(even) {
+.tablaVerTodasLasRecetas tr:nth-child(even), .tablaEliminarRecetas tr:nth-child(even) {
     background-color: #f9f9f9; /* Fondo más claro para las filas pares */
+}
+
+.formAgregarReceta {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+    margin-top: 20px; /* Añade espacio arriba de la tabla */
+    font-size: 16px; /* Tamaño de la fuente */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.formAgregarReceta input {
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+    margin-top: 20px; /* Añade espacio arriba de la tabla */
+    font-size: 16px; /* Tamaño de la fuente */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.formAgregarReceta button {
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+    margin-top: 20px; /* Añade espacio arriba de la tabla */
+    font-size: 16px; /* Tamaño de la fuente */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+#nombreReceta {
+    display: block;          /* Hace que el input sea un bloque */
+    width: 50%;              /* Controla el tamaño del input */
+    margin: 0 auto;          /* Centra el input horizontalmente */
+    padding: 8px;            /* Espacio interno */
+    font-size: 14px;         /* Tamaño de fuente más pequeño */
+    text-align: center;      /* Centra el texto dentro del campo */
+    margin-bottom: 10px;     /* Espacio entre los inputs */
+}
+
+#ingredientesReceta, #pasosReceta {
+    width: 100%;             /* Ocupa el 100% del ancho disponible */
+    padding: 10px;           /* Espacio interno */
+    font-size: 16px;         /* Tamaño de fuente */
+    margin-bottom: 10px;     /* Espacio entre los campos */
+}
+
+/* Tamaño personalizado para los textareas */
+#ingredientesReceta, #pasosReceta {
+    height: 150px;           /* Aumentar la altura */
+    box-sizing: border-box;  /* Incluye el padding en el tamaño */
+}
+
+.formBuscarReceta {
+    margin-top: 100px;
+    margin-bottom: 30px; /* Espaciado debajo del título */
+    background-color: #ffffff; /* Fondo blanco */
+    border: 2px solid #4caf50; /* Borde verde */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px;
+    text-align: center; /* Centrar el texto */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el efecto 3D */
 }

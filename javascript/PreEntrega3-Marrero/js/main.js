@@ -1,260 +1,210 @@
 class Receta {
-    constructor(nombreReceta, ingredientesReceta, pasosReceta,) {
+    constructor(nombreReceta, ingredientesReceta, pasosReceta) {
         this.nombreReceta = nombreReceta;
         this.ingredientesReceta = ingredientesReceta;
         this.pasosReceta = pasosReceta;
     }
 }
 
-function preguntarModificar(campo) {
-    let respuesta = prompt(`¿Desea ${campo} a la receta? 1 - Si, 0 - No`);
-    return parseInt(respuesta) === 1;
+
+function eliminarRecetaPorIndice(index) {
+
+    const confirmar = confirm("¿Estás seguro de que deseas eliminar esta receta?");
+    if (confirmar){
+        recetas.splice(index, 1);
+        renderizarTablaEliminarReceta();
+    }
 
 }
 
+function agregarReceta(e) {
+    e.preventDefault();
 
-function modificarReceta() {
 
-    let recetaABuscar = prompt("Ingrese la receta que desea modificar: ").toLowerCase();
-    const recetaEncontrada = recetas.find((el) => el.nombreReceta.toLowerCase() === recetaABuscar);
+    const inputNombreReceta = document.getElementById("nombreReceta");
+    const inputIngredientesReceta = document.getElementById("ingredientesReceta");
+    const inputPasosReceta = document.getElementById("pasosReceta");
 
+
+    const nombreReceta = inputNombreReceta.value;
+    const ingredientesReceta = inputIngredientesReceta.value;
+    const pasosReceta = inputPasosReceta.value;
+
+    if (!nombreReceta) {
+        alert("Por favor, ingresa un nombre de receta.");
+        return;
+    }
+
+    if (!ingredientesReceta) {
+        alert("Por favor, ingrese al menos un ingrediente para su nueva receta.");
+        return;
+    }
+
+    if (!pasosReceta) {
+        alert("Por favor, ingrese al menos un paso para preparar su nueva receta.");
+        return;
+    }
+
+    const nuevaReceta = new Receta(nombreReceta, ingredientesReceta, pasosReceta);
+    recetas.push(nuevaReceta);
+
+    renderizarTablaReceta(nuevaReceta);
+
+    const confirmar = confirm("¿Desea agregar otra receta?");
+
+    if (confirmar){
+        inputNombreReceta.value = "";
+        inputIngredientesReceta.value = "";
+        inputPasosReceta.value = "";
+    }else{
+        renderizarVisibilidad("formAgregarReceta","none");
+    }
+}
+
+
+
+function buscarUnaReceta(e) {
+    e.preventDefault(); // Prevenir el comportamiento por defecto del submit
+
+    const inputRecetaABuscar = document.getElementById("nombreRecetaABuscar");
+    const nombreBuscado = inputRecetaABuscar.value.toLowerCase().trim();
+
+    if (!nombreBuscado) {
+        alert("Por favor, ingresa un nombre de receta para buscar.");
+        return;
+    }
+    const recetaEncontrada = recetas.find((receta) =>
+        receta.nombreReceta.toLowerCase() === nombreBuscado
+    );
 
     if (recetaEncontrada) {
-
-        if (preguntarModificar("el nombre")) {
-            let nuevoNombreReceta = prompt("Ingrese el nuevo nombre de la receta: ");
-            recetaEncontrada.nombreReceta = nuevoNombreReceta;
-        }
-
-        if (preguntarModificar("los ingredientes")) {
-            let nuevoIngredientesReceta = funcionIngredientesReceta(recetaABuscar);
-            recetaEncontrada.ingredientes = nuevoIngredientesReceta;
-        }
-
-        if (preguntarModificar("los pasos")) {
-            let nuevoPasosReceta = funcionPasosReceta(recetaABuscar);
-            recetaEncontrada.pasosReceta = nuevoPasosReceta;
-        }
-        alert("Receta modificada exitosamente.");
+        renderizarTablaReceta(recetaEncontrada);
+        inputRecetaABuscar.value = "";
+        return recetaEncontrada;
     } else {
-        alert("No se encontro la receta");
-    }
-}
-function eliminarReceta() {
-
-    let recetaABuscar = prompt("Ingrese la receta(s) que desea eliminar: ").toLowerCase();
-    const recetaEncontrada = recetas.filter((el) => el.nombreReceta.toLowerCase() === recetaABuscar);
-
-    if (recetaEncontrada !== -1) {
-        const confirmacion = confirm(`¿Estás seguro de que quieres eliminar ${recetaEncontrada.length} receta(s) con ese nombre?`);
-        if (confirmacion) {
-            recetas = recetas.filter((el) => el.nombreReceta.toLowerCase() !== recetaABuscar);
-            alert("Receta(s) eliminada(s) exitosamente.");
-        } else {
-            alert("Eliminación cancelada.");
-        }
-    } else {
-        alert("No se encontro la receta");
-    }
-
-}
-
-function buscarUnaReceta() {
-
-    recetaABuscar = prompt("Ingrese la receta que desea buscar: ").toLowerCase();
-    const recetaEncontrada = recetas.find((el) => el.nombreReceta.toLowerCase() === recetaABuscar);
-
-    if (recetaEncontrada) {
-        console.log(recetaEncontrada);
-    } else {
-        console.log("No se encontro la receta");
-    }
-}
-
-function verTodasLasRecetas() { //TODO : MEJORAR ESTA FUNCION PARA VER TODOS LOS INGREGIENTES Y PASOS.
-    //PODEMOS UTILIZAR UN FILTER
-    recetas.forEach((el, i) => {
-        console.log("Receta: " + (i + 1) + " - " + el.nombreReceta);
-    })
-}
-
-function agregarIngredientesReceta(nombreReceta) {
-
-    let opcionMenu;
-    let ingredientesReceta = {};
-    alert(`Ingrese los ingredientes de la receta: ${nombreReceta}`);
-
-    while (opcionMenu !== 0) {
-        let nombreIngrediente = prompt("Ingrese el nombre del ingrediente: ").toLowerCase();
-        let cantidad = parseFloat(prompt(`Ingrese la cantidad de ${nombreIngrediente}: \n\nEn el siguiente paso ingresara la medida (ml, kg, gr, unidad)`));
-        let unidad = prompt(`Ingrese la unidad de medida para ${nombreIngrediente}: Recuerde: ml, kg, gr, unidad`).toLowerCase();
-
-        ingredientesReceta[nombreIngrediente] = {
-            cantidad: cantidad,
-            unidad: unidad
-        };
-
-        opcionMenu = parseInt(prompt("¿Desea agregar otro ingrediente? 1 - Si, 0 - No"));
-
-        return ingredientesReceta;
-    }
-
-}
-function agregarPasosReceta(nombreReceta) {
-
-    let opcionMenu;
-    let pasosReceta = {};
-    let paso = 1
-
-    alert(`Ingrese los pasos para realizar: ${nombreReceta}`);
-
-
-    while (opcionMenu !== 0) {
-        let descripcionPaso = prompt("Ingrese la descripcion del paso: " + paso).toLowerCase();
-        pasosReceta[paso] = {
-            descripcionPaso: descripcionPaso,
-        };
-
-        paso = paso + 1;
-        opcionMenu = parseInt(prompt("¿Desea agregar otro paso? 1 - Si, 0 - No"));
-
-    }
-
-    return pasosReceta;
-}
-
-function agregarReceta() {
-    let opcionReceta;
-
-    while (opcionReceta !== 0) {
-        const nombreReceta = prompt("Ingrese el nombre de la receta: ").toLowerCase();
-        ingredientesReceta = agregarIngredientesReceta(nombreReceta);
-        pasosReceta = agregarPasosReceta(nombreReceta);
-
-        let nuevaReceta = new Receta(nombreReceta, ingredientesReceta, pasosReceta);  
-        recetas.push(nuevaReceta);
-        console.log(nuevaReceta);
-        alert("Receta agregada exitosamente.");
-        renderizarTablaRecetas();
-
-        opcionReceta = parseInt(prompt("¿Desea agregar otra receta? 1 - Si, 0 - No"));
-  
+        alert("No se encontró la receta");
+        inputRecetaABuscar.value = "";
+        return null;
     }
 }
 
 
-//GET ELEMENTS
+function verTodasLasRecetas() {
 
-const createRecipe = document.getElementById("createRecipe");
-const getRecipe = document.getElementById("getRecipe");
-const modifyRecipe = document.getElementById("modifyRecipe");
-const deleteRecipe = document.getElementById("deleteRecipe");
-const tbodyRecetas = document.getElementById("tbodyRecetas");
-
-
-//RENDER FUNCTIONS
-
-function renderizarTablaRecetas() {
-    
+    renderizarVisibilidad("tablaVerTodasLasRecetas","block");    
     tbodyRecetas.innerHTML = "";
-
-    for (let receta of recetas) {
+    recetas.forEach((receta) => {
         tbodyRecetas.innerHTML += `
         <tr>
             <td>${receta.nombreReceta}</td>
-            <td>${renderizarIngredientes(receta.ingredientesReceta)}</td>
-            <td>${renderizarPasos(receta.pasosReceta)}</td>
+            <td>${receta.ingredientesReceta}</td>
+            <td>${receta.pasosReceta}</td>
         </tr>`;
-    }
+    });
 }
 
-// Función para convertir los ingredientes en texto
-function renderizarIngredientes(ingredientes) {
-    let resultado = "";
-    for (let [nombre, detalle] of Object.entries(ingredientes)) {
-        resultado += `${nombre}: ${detalle.cantidad} ${detalle.unidad}<br>`;
-    }
-    return resultado;
-}
-
-// Función para convertir los pasos en texto
-function renderizarPasos(pasos) {
-    let resultado = "";
-    for (let [paso, detalle] of Object.entries(pasos)) {
-        resultado += `${paso} - ${detalle.descripcionPaso} <br>`;
-    }
-    return resultado;
+function rellenarFormularioEdicion(receta) {
+    document.getElementById("nombreRecetaEditar").value = receta.nombreReceta;
+    document.getElementById("ingredientesRecetaEditar").value = receta.ingredientesReceta;
+    document.getElementById("pasosRecetaEditar").value = receta.pasosReceta;
 }
 
 
 
+function renderizarTablaReceta(recetaEncontrada) {
+
+    tbodyRecetas.innerHTML = "";
+        tbodyRecetas.innerHTML += `
+        <tr>
+            <td>${recetaEncontrada.nombreReceta}</td>
+            <td>${recetaEncontrada.ingredientesReceta}</td>
+            <td>${recetaEncontrada.pasosReceta}</td>
+        </tr>`;
+    renderizarVisibilidad("tablaVerTodasLasRecetas","block");    
+}
+
+function renderizarTablaEliminarReceta() {
+    renderizarVisibilidad("tablaEliminarRecetas","block");
+
+    tbodyEliminarRecetas.innerHTML = "";
+
+    recetas.forEach((receta, index) => {
+        tbodyEliminarRecetas.innerHTML += `
+        <tr>
+            <td>${receta.nombreReceta}</td>
+            <td>${receta.ingredientesReceta}</td>
+            <td>${receta.pasosReceta}</td>
+            <td><button class="eliminar-button" data-index="${index}">Eliminar</button></td>
+        </tr>`;
+    });
+
+    const botonesEliminar = document.querySelectorAll(".eliminar-button");
+    botonesEliminar.forEach((boton) => {
+        boton.addEventListener("click", (event) => {
+            const index = parseInt(event.target.getAttribute("data-index"));
+            eliminarRecetaPorIndice(index);
+        });
+    });
+}
+
+function renderizarVisibilidad(elemento, displayStyle) {
+    const elementoABuscar = document.getElementById(elemento);
+    elementoABuscar.style.display = displayStyle;
+}
+
+// Variables globales
+const tbodyRecetas = document.getElementById("tbodyRecetas");
+
+const botonAgregarNuevaReceta = document.getElementById("formAgregarReceta");
+const botonBuscarUnaReceta = document.getElementById("formBuscarReceta");
+const botonPrincipalEliminarReceta = document.getElementById("botonPrincipalEliminarReceta");
+const botonPrincipalVerTodasLasRecetas = document.getElementById("botonPrincipalVerTodasLasRecetas");
+const botonPrincipalModificarReceta = document.getElementById("botonPrincipalModificarReceta");
+
+//Botones principales
+botonPrincipalCrearReceta.addEventListener("click", () => {
+    renderizarVisibilidad("formAgregarReceta", "block");
+    renderizarVisibilidad("tablaVerTodasLasRecetas", "none");
+    renderizarVisibilidad("tablaEliminarRecetas", "none");
+    renderizarVisibilidad("formBuscarReceta", "none");
+});
+
+botonPrincipalBuscarReceta.addEventListener("click", () => {
+    renderizarVisibilidad("formBuscarReceta", "block");
+    renderizarVisibilidad("formAgregarReceta", "none");
+    renderizarVisibilidad("tablaEliminarRecetas", "none");
+    renderizarVisibilidad("tablaVerTodasLasRecetas", "none");
+});
+
+botonPrincipalEliminarReceta.addEventListener("click", () => {
+    renderizarVisibilidad("formBuscarReceta", "none");
+    renderizarVisibilidad("formAgregarReceta", "none");
+    renderizarVisibilidad("tablaVerTodasLasRecetas", "none");
+    renderizarTablaEliminarReceta();
+});
+
+botonPrincipalModificarReceta.addEventListener("click", () => {
+    alert("COMIIIIING SOOOON");
+});
+
+botonPrincipalVerTodasLasRecetas.addEventListener("click", () => {
+    renderizarVisibilidad("formBuscarReceta", "none");
+    renderizarVisibilidad("formAgregarReceta", "none");
+    renderizarVisibilidad("tablaVerTodasLasRecetas", "none");
+    renderizarVisibilidad("tablaEliminarRecetas", "none");
+    verTodasLasRecetas();
+});
+
+//Eventos botones secundarios
+botonAgregarNuevaReceta.addEventListener("submit", agregarReceta);
+botonBuscarUnaReceta.addEventListener("submit", buscarUnaReceta);
 
 
-
-
-recetas = [
-    new Receta("Pastel de chocolate", {
-        chocolate: {
-            cantidad: 200,
-            unidad: "gr"
-        },
-        harina: {
-            cantidad: 200,
-            unidad: "gr"
-        }
-    }, {
-        1: { descripcionPaso: "Preparar los ingredientes" },
-        2: { descripcionPaso: "Hacer la masa" }
-    }),
+// Array de recetas inicial
+let recetas = [
+    new Receta("Pastel de chocolate", "Leche, harina, azúcar, chocolate", "1. Lavar la naranja, 2. Agregar la harina"),
+    new Receta("Budín de naranja", "Leche, harina, azúcar, naranja", "1. Lavar la naranja, 2. Agregar la harina"),
 ];
 
-console.log(recetas)
 
-
-
-
-
-///MENUUUUUUUU
-
-function menuPrincipal() {
-
-    let opcionMenuReceta;
-    recetas = [];
-
-    while (opcionMenuReceta !== 0) {
-        console.log("***************************************************************************")
-        console.log("_________________ * BIENVENIDO AL RECETARIO * CULINARIA * __________________")
-        console.log("***************************************************************************")
-
-        opcionMenuReceta = parseInt(prompt("Menu: \n1 - Crear nueva receta\n2 - Buscar una receta \n3 - Ver todas las recetas\n4 - Modificar receta\n5 - Eliminar receta\n0 - Salir"));
-
-        if (isNaN(opcionMenuReceta)) {
-            alert("Por favor, ingrese un numero valido.")
-        }
-        switch (opcionMenuReceta) {
-            case 1:
-                agregarReceta();
-                break;
-            case 2:
-                buscarUnaReceta();
-                break;
-            case 3:
-                verTodasLasRecetas();
-                break;
-            case 4:
-                modificarReceta();
-                break;
-            case 5:
-                eliminarReceta();
-                break;
-            case 0:
-                alert("Muchas gracias por usar el sistema, esperamos verlo pronto! :)")
-                break;
-            default:
-                alert("Por favor, ingrese un numero valido")
-                break;
-        }
-    }
-}
-
-menuPrincipal();
+//TODO: agregar controles para input vacios, ejemplo en buscar

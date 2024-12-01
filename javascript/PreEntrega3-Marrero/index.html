@@ -9,16 +9,17 @@
     </head>
 
     <body>
-        <div class="culinaria-box">
+        <div class="titulo">
             <h1>CULINARIA</h1>
         </div>
-        <div class="button-container">        
-            <button id="crearReceta">CREAR NUEVA RECETA</button>
-            <button id="buscarReceta">LEER UNA RECETA</button>
-            <button id="modificarReceta">MODIFICAR RECETA</button>
-            <button id="eliminarReceta">ELIMINAR RECETA</button>
+        <div class="menu">        
+            <button id="botonPrincipalCrearReceta">CREAR NUEVA RECETA</button>
+            <button id="botonPrincipalBuscarReceta">LEER UNA RECETA</button>
+            <button id="botonPrincipalModificarReceta">MODIFICAR RECETA</button>
+            <button id="botonPrincipalEliminarReceta">ELIMINAR RECETA</button>
+            <button id="botonPrincipalVerTodasLasRecetas">VER TODAS LAS RECETAS</button>
         </div>
-        <table>
+        <table class="tablaVerTodasLasRecetas" id="tablaVerTodasLasRecetas" style="display: none">
             <thead>
                 <tr>
                     <th>NOMBRE</th>
@@ -26,15 +27,36 @@
                     <th>PASO A PASO</th>
                 </tr>
             </thead>
-            <tbody id="tbodyRecetas">
-                <tr>
-                    <td>Budín de naranja</td>
-                    <td>Leche, harina, azúcar, naranja</td>
-                    <td>1. Lavar la naranja, 2. Agregar la harina</td>
-                </tr>
-            </tbody>
+            <tbody id="tbodyRecetas"></tbody>
         </table>
-        
+        <table class="tablaEliminarRecetas" id="tablaEliminarRecetas" style="display: none">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>INGREDIENTES</th>
+                    <th>PASO A PASO</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyEliminarRecetas"></tbody>
+        </table>
+        <form class="formEditarReceta" id="formEditarReceta" style="display: none">
+            <input type="text" id="buscarRecetaParaEditar" placeholder="Buscar receta" />
+            <input type="text" id="nombreRecetaEditar" placeholder="Nombre de la receta" />
+            <input type="text" id="ingredientesRecetaEditar" placeholder="Ingredientes de la receta" />
+            <input type="text" id="pasosRecetaEditar" placeholder="Paso a paso de la receta" />
+            <button type="submit">Guardar cambios</button>
+        </form>
+        <form class="formAgregarReceta" id="formAgregarReceta" style="display: none">
+            <input type = "text" id="nombreReceta" placeholder="Nombre de la receta" />
+            <input type = "text" id="ingredientesReceta" placeholder="Ingredientes de la receta" />
+            <input type = "text" id="pasosReceta" placeholder="Paso a paso de la receta" />
+            <button type="submit">AGREGAR RECETA</button>
+        </form>
+        <form class="formBuscarReceta" id="formBuscarReceta" style="display: none">
+            <input type = "text" id="nombreRecetaABuscar" placeholder="Nombre de la receta" />
+            <button type="submit">BUSCAR RECETA</button>
+        </form>
+
         <script src="js/main.js"></script>
     </body>
 
