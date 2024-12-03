@@ -52,7 +52,7 @@ button:hover {
 }
 
 /* Estilos básicos para la tabla */
-.tablaVerTodasLasRecetas, .tablaEliminarRecetas, .formEditarReceta{
+.tablaVerTodasLasRecetas, .tablaEliminarRecetas, .formModificarReceta, .tablaModificarRecetas{
     width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
     border-collapse: collapse; /* Elimina el espacio entre bordes */
     margin-top: 20px; /* Añade espacio arriba de la tabla */
@@ -61,23 +61,23 @@ button:hover {
 }
 
 /* Borde para celdas */
-.tablaVerTodasLasRecetas th, table td, .tablaEliminarRecetas th, table td, .formEditarReceta th, table td {
+.tablaVerTodasLasRecetas th, table td, .tablaEliminarRecetas th, table td, .tablaModificarRecetas th, table td {
     border: 1px solid #ddd; /* Borde gris claro */
     padding: 8px; /* Espaciado interno */
 }
 
 /* Fondo para encabezados */
-.tablaVerTodasLasRecetas th , .tablaEliminarRecetas th, .formEditarReceta th {
+.tablaVerTodasLasRecetas th , .tablaEliminarRecetas th, .tablaModificarRecetas th, .formModificarReceta th{
     background-color: #f4f4f4; /* Fondo gris claro */
     font-weight: bold; /* Texto en negrita */
 }
 
 /* Filas alternas con diferente color */
-.tablaVerTodasLasRecetas tr:nth-child(even), .tablaEliminarRecetas tr:nth-child(even) {
+.tablaVerTodasLasRecetas tr:nth-child(even), .tablaEliminarRecetas tr:nth-child(even), .tablaModificarRecetas tr:nth-child(even) {
     background-color: #f9f9f9; /* Fondo más claro para las filas pares */
 }
 
-.formAgregarReceta {
+.formAgregarReceta, .formModificarReceta {
     width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
     border-collapse: collapse; /* Elimina el espacio entre bordes */
     margin-top: 20px; /* Añade espacio arriba de la tabla */
@@ -85,21 +85,21 @@ button:hover {
     text-align: left; /* Alinea el texto a la izquierda */
 }
 
-.formAgregarReceta input {
+.formAgregarReceta input, .formModificarReceta input {
     border-collapse: collapse; /* Elimina el espacio entre bordes */
     margin-top: 20px; /* Añade espacio arriba de la tabla */
     font-size: 16px; /* Tamaño de la fuente */
     text-align: left; /* Alinea el texto a la izquierda */
 }
 
-.formAgregarReceta button {
+.formAgregarReceta button, .formModificarReceta button {
     border-collapse: collapse; /* Elimina el espacio entre bordes */
     margin-top: 20px; /* Añade espacio arriba de la tabla */
     font-size: 16px; /* Tamaño de la fuente */
     text-align: left; /* Alinea el texto a la izquierda */
 }
 
-#nombreReceta {
+#nombreReceta, #nombreRecetaModificar{
     display: block;          /* Hace que el input sea un bloque */
     width: 50%;              /* Controla el tamaño del input */
     margin: 0 auto;          /* Centra el input horizontalmente */
@@ -109,7 +109,7 @@ button:hover {
     margin-bottom: 10px;     /* Espacio entre los inputs */
 }
 
-#ingredientesReceta, #pasosReceta {
+#ingredientesReceta, #pasosReceta, #ingredientesRecetaModificar, #pasosRecetaModificar {
     width: 100%;             /* Ocupa el 100% del ancho disponible */
     padding: 10px;           /* Espacio interno */
     font-size: 16px;         /* Tamaño de fuente */
@@ -117,7 +117,7 @@ button:hover {
 }
 
 /* Tamaño personalizado para los textareas */
-#ingredientesReceta, #pasosReceta {
+#ingredientesReceta, #pasosReceta, #ingredientesRecetaModificar, #pasosRecetaModificar {
     height: 150px;           /* Aumentar la altura */
     box-sizing: border-box;  /* Incluye el padding en el tamaño */
 }

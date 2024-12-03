@@ -39,12 +39,21 @@
             </thead>
             <tbody id="tbodyEliminarRecetas"></tbody>
         </table>
-        <form class="formEditarReceta" id="formEditarReceta" style="display: none">
-            <input type="text" id="buscarRecetaParaEditar" placeholder="Buscar receta" />
-            <input type="text" id="nombreRecetaEditar" placeholder="Nombre de la receta" />
-            <input type="text" id="ingredientesRecetaEditar" placeholder="Ingredientes de la receta" />
-            <input type="text" id="pasosRecetaEditar" placeholder="Paso a paso de la receta" />
-            <button type="submit">Guardar cambios</button>
+        <table class="tablaModificarRecetas" id="tablaModificarRecetas" style="display: none">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>INGREDIENTES</th>
+                    <th>PASO A PASO</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyModificarRecetas"></tbody>
+        </table>
+        <form class="formModificarReceta" id="formModificarReceta" style="display: none">
+            <input type = "text" id="nombreRecetaModificar" />
+            <input type = "text" id="ingredientesRecetaModificar" />
+            <input type = "text" id="pasosRecetaModificar" />
+            <button type="submit">MODIFICAR RECETA</button>
         </form>
         <form class="formAgregarReceta" id="formAgregarReceta" style="display: none">
             <input type = "text" id="nombreReceta" placeholder="Nombre de la receta" />
