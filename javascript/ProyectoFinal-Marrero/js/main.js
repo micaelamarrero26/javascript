@@ -13,12 +13,20 @@ function guardarRecetaEnLS(){
 
 function eliminarRecetaPorIndice(index) {
 
-    const confirmar = confirm("¿Estás seguro de que deseas eliminar esta receta?");
-    if (confirmar){
-        recetas.splice(index, 1);
-        guardarRecetaEnLS();
-        renderizarTablaEliminarReceta();
-    }
+    Swal.fire({
+        title: "Estas seguro de que deseas eliminar esta receta?",
+        icon: "warning",
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            recetas.splice(index, 1);
+            guardarRecetaEnLS();
+            renderizarTablaEliminarReceta();
+        }
+    });
+
 }
 
 function agregarReceta(e) {
@@ -35,17 +43,17 @@ function agregarReceta(e) {
     const pasosReceta = inputPasosReceta.value;
 
     if (!nombreReceta) {
-        alert("Por favor, ingresa un nombre de receta.");
+        alertaInputVacio("el nombre de la receta");
         return;
     }
 
     if (!ingredientesReceta) {
-        alert("Por favor, ingrese al menos un ingrediente para su nueva receta.");
+        alertaInputVacio("los ingredientes de la receta");
         return;
     }
 
     if (!pasosReceta) {
-        alert("Por favor, ingrese al menos un paso para preparar su nueva receta.");
+        alertaInputVacio("al menos un paso");
         return;
     }
 
@@ -57,18 +65,24 @@ function agregarReceta(e) {
 
     renderizarTablaReceta(nuevaReceta);
 
-    const confirmar = confirm("¿Desea agregar otra receta?");
-
-    if (confirmar){
-        inputNombreReceta.value = "";
-        inputIngredientesReceta.value = "";
-        inputPasosReceta.value = "";
-    }else{
-        renderizarVisibilidad("formAgregarReceta","none");
-        inputNombreReceta.value = "";
-        inputIngredientesReceta.value = "";
-        inputPasosReceta.value = "";
-    }
+    Swal.fire({
+        title: "Desea agregar otra receta?",
+        icon: "success",
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            inputNombreReceta.value = "";
+            inputIngredientesReceta.value = "";
+            inputPasosReceta.value = "";
+        } else {
+            renderizarVisibilidad("formAgregarReceta","none");
+            inputNombreReceta.value = "";
+            inputIngredientesReceta.value = "";
+            inputPasosReceta.value = "";
+        }
+    });
 }
 
 
@@ -78,7 +92,7 @@ function buscarUnaReceta(e) {
     const nombreBuscado = inputRecetaABuscar.value.toLowerCase().trim();
 
     if (!nombreBuscado) {
-        alert("Por favor, ingresa un nombre de receta para buscar.");
+        alertaInputVacio("un nombre de receta para buscar.")
         return;
     }
     const recetaEncontrada = recetas.find((receta) =>
@@ -90,7 +104,12 @@ function buscarUnaReceta(e) {
         inputRecetaABuscar.value = "";
         return recetaEncontrada;
     } else {
-        alert("No se encontró la receta");
+        Swal.fire({
+            title: `No se encontro la receta: ${nombreBuscado}`,
+            icon: "error",
+            confirmButtonText: "Ok"
+        })
+
         inputRecetaABuscar.value = "";
         return null;
     }
@@ -117,17 +136,17 @@ function modificarRecetaPorIndice(index) {
         const pasosReceta = document.getElementById("pasosRecetaModificar").value.trim();
 
         if (!nombreReceta) {
-            alert("Por favor, ingresa un nombre de receta.");
+            alertaInputVacio("el nombre de la receta");
             return;
         }
-
+    
         if (!ingredientesReceta) {
-            alert("Por favor, ingrese al menos un ingrediente para su nueva receta.");
+            alertaInputVacio("los ingredientes de la receta");
             return;
         }
-
+    
         if (!pasosReceta) {
-            alert("Por favor, ingrese al menos un paso para preparar su nueva receta.");
+            alertaInputVacio("al menos un paso");
             return;
         }
 
@@ -139,7 +158,12 @@ function modificarRecetaPorIndice(index) {
 
         guardarRecetaEnLS();
 
-        alert("Receta modificada con éxito.");
+        Swal.fire({
+            title: `La receta ${receta.nombreReceta} ha sido modificada`,
+            icon: "success",
+            confirmButtonText: "Ok"
+        })
+
         renderizarTablaModificarReceta();
         renderizarVisibilidad("formModificarReceta", "none");
 
@@ -302,6 +326,18 @@ botonBuscarUnaReceta.addEventListener("submit", buscarUnaReceta);
 
 // Array de recetas inicial
 let recetas = obtenerDesdeLocalStorage();
+
+
+//Alert input vacios
+
+function alertaInputVacio(valor) {
+
+    Swal.fire({
+        title: `Por favor, debe ingresar ${valor}`,
+        icon: "error",
+        confirmButtonText: "Ok"
+    })
+}
 
 
 
