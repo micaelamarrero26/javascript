@@ -1,0 +1,72 @@
+[
+    {
+        "nombreReceta": "Pasta Carbonara",
+        "ingredientesReceta": [
+            "200g de pasta",
+            "100g de panceta",
+            "2 huevos",
+            "50g de queso parmesano",
+            "Pimienta negra"
+        ],
+        "pasosReceta": [
+            "Cocina la pasta en agua con sal hasta que esté al dente.",
+            "Fríe la panceta hasta que esté dorada.",
+            "Bate los huevos y mézclalos con el queso parmesano.",
+            "Escurre la pasta y mézclala con la panceta.",
+            "Añade la mezcla de huevo y queso a la pasta caliente.",
+            "Sirve con pimienta negra recién molida."
+        ]
+    },
+    {
+        "nombreReceta": "Tacos de Pollo",
+        "ingredientesReceta": [
+            "500g de pechuga de pollo",
+            "1 cebolla",
+            "1 pimiento rojo",
+            "Especias para tacos",
+            "Tortillas de maíz",
+            "Guacamole"
+        ],
+        "pasosReceta": [
+            "Corta el pollo en tiras y sazónalo con especias para tacos.",
+            "Cocina el pollo en una sartén hasta que esté dorado.",
+            "Corta la cebolla y el pimiento en tiras y sofríelos.",
+            "Rellena las tortillas con el pollo y las verduras.",
+            "Añade guacamole y sirve caliente."
+        ]
+    },
+    {
+        "nombreReceta": "Ensalada César",
+        "ingredientesReceta": [
+            "1 lechuga romana",
+            "100g de crutones",
+            "50g de queso parmesano",
+            "1 pechuga de pollo a la parrilla",
+            "Aderezo César"
+        ],
+        "pasosReceta": [
+            "Lava y corta la lechuga en trozos.",
+            "Cocina la pechuga de pollo y córtala en tiras.",
+            "En un bol, mezcla la lechuga, los crutones y el queso parmesano.",
+            "Añade el pollo y el aderezo César.",
+            "Mezcla bien y sirve."
+        ]
+    },
+    {
+        "nombreReceta": "Ensalada Micaela",
+        "ingredientesReceta": [
+            "1 lechuga romana",
+            "100g de crutones",
+            "50g de queso parmesano",
+            "1 pechuga de pollo a la parrilla",
+            "Aderezo César"
+        ],
+        "pasosReceta": [
+            "Lava y corta la lechuga en trozos.",
+            "Cocina la pechuga de pollo y córtala en tiras.",
+            "En un bol, mezcla la lechuga, los crutones y el queso parmesano.",
+            "Añade el pollo y el aderezo César.",
+            "Mezcla bien y sirve."
+        ]
+    }
+]

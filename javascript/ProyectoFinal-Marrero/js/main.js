@@ -250,19 +250,39 @@ function renderizarVisibilidad(elemento, displayStyle) {
     elementoABuscar.style.display = displayStyle;
 }
 
-function obtenerDesdeLocalStorage(){
-    const recetasGuardadas = localStorage.getItem("recetas");
+fetch("recetas.json")
+    .then((response) => response.json())
+    .then((json) => {
+        agregarRecetasSinDuplicados(json);
+        recetas = JSON.parse(localStorage.getItem("recetas")) || [];
+    });
 
-    if (recetasGuardadas === null) {
+
+function agregarRecetasSinDuplicados(jsonRecetas) {
+    const recetasGuardadas = JSON.parse(localStorage.getItem("recetas")) || [];
+
+    const recetasNuevas = jsonRecetas.filter((recetaJson) => {
+        return !recetasGuardadas.some((recetaGuardada) => recetaGuardada.nombreReceta === recetaJson.nombreReceta);
+    });
+
+    if (recetasNuevas.length > 0) {
+        const recetasFinales = [...recetasGuardadas, ...recetasNuevas];
+        localStorage.setItem("recetas", JSON.stringify(recetasFinales));
+    }
+}
+
+function obtenerDesdeLocalStorage() {
+    const recetasGuardadas = JSON.parse(localStorage.getItem("recetas")) || [];
+
+    if (recetasGuardadas.length === 0) {
         return [
             new Receta("Pastel de chocolate", "Leche, harina, azúcar, chocolate", "1. Lavar la naranja, 2. Agregar la harina"),
             new Receta("Budín de naranja", "Leche, harina, azúcar, naranja", "1. Lavar la naranja, 2. Agregar la harina"),
         ];
     } else {    
-        return JSON.parse(recetasGuardadas);
+        return recetasGuardadas;
     }
 }
-
 
 // Variables globales
 const tbodyRecetas = document.getElementById("tbodyRecetas");
@@ -339,6 +359,3 @@ function alertaInputVacio(valor) {
     })
 }
 
-
-
-//TODO: agregar controles para input vacios, ejemplo en buscar
